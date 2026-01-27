@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login Page</title>
+
+    <style>
+        body {
+            background-color: #f0f0f0;
+            font-family: Arial;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+        }
+
+        .box {
+            background-color: white;
+            width: 300px;
+            padding: 20px;
+            text-align: center;
+            border-radius: 8px;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-top: 10px;
+        }
+
+        button {
+            width: 100%;
+            padding: 8px;
+            margin-top: 10px;
+            background-color: green;
+            color: white;
+            border: none;
+        }
+
+        a {
+            color: green;
+            cursor: pointer;
+        }
+
+        #signup, #home {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="box">
+
+    <!-- LOGIN -->
+    <div id="login">
+        <h2>Login</h2>
+
+        <input type="email" placeholder="Email">
+        <input type="password" placeholder="Password">
+
+        <button onclick="login()">Login</button>
+
+        <p>Don't have an account? <a onclick="showSignup()">Sign up</a></p>
+    </div>
+
+    <!-- SIGNUP -->
+    <div id="signup">
+        <h2>Sign Up</h2>
+
+        <input type="email" placeholder="Email">
+        <input type="password" placeholder="Password">
+        <input type="password" placeholder="Confirm Password">
+
+        <button onclick="signup()">Sign Up</button>
+
+        <p>Already have an account? <a onclick="showLogin()">Login</a></p>
+    </div>
+
+    <!-- HOME -->
+    <div id="home">
+        <h2>Home Page</h2>
+        <p>Login successful 🎉</p>
+        <button onclick="logout()">Logout</button>
+    </div>
+
+</div>
+
+<script>
+    function login() {
+        document.getElementById("login").style.display = "none";
+        document.getElementById("home").style.display = "block";
+    }
+
+    function signup() {
+        document.getElementById("signup").style.display = "none";
+        document.getElementById("home").style.display = "block";
+    }
+
+    function logout() {
+        document.getElementById("home").style.display = "none";
+        document.getElementById("login").style.display = "block";
+    }
+
+    function showSignup() {
+        document.getElementById("login").style.display = "none";
+        document.getElementById("signup").style.display = "block";
+    }
+
+    function showLogin() {
+        document.getElementById("signup").style.display = "none";
+        document.getElementById("login").style.display = "block";
+    }
+</script>
+
+</body>
+</html>
