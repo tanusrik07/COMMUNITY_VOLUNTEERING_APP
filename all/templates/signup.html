@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Signup - Helpize{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <h1>Signup</h1>
+        <form method="post">
+            <input type="text" name="name" placeholder="Name" required><br>
+            <input type="number" name="age" placeholder="Age" required><br>
+            <input type="tel" name="phone" placeholder="Phone" required><br>
+            <select type="blood_group" name="blood_group" placeholder= "Blood Group" required><option value="O+">O+</option><option value="A+">A+</option><option value="A-">A-</option><option value="O-">O-</option><option value="B+">B+</option><option value="B-">B-</option><option value="AB+">AB+</option><option value="AB-">AB-</option></select><br>
+            <textarea name="address" placeholder="Address" required></textarea><br>
+            <input type="email" name="email" placeholder="Email" required><br>
+            <input type="password" name="password" placeholder="Password" required>
+            <button type="submit">Signup</button>
+        </form>
+        <p><a href="/login">Login</a></p>
+    </div>
+</div>
+{% endblock %}

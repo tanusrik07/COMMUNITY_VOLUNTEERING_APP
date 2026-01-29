@@ -1,0 +1,18 @@
+:root {
+    --bg-color: #ffffff;
+    --text-color: #333333;
+    --accent-color: #ff4444;
+    --secondary-color: #4caf50;
+    --font-family: 'Roboto', sans-serif;
+}
+.dark-mode {
+    --bg-color: #121212;
+    --text-color: #ffffff;
+    --accent-color: #ff6666;
+    --secondary-color: #66ff66;
+}
+body { font-family: var(--font-family); background-color: var(--bg-color); color: var(--text-color); margin: 0; padding: 0; transition: 0.3s; }
+.navbar, .footer { background: linear-gradient(45deg, var(--accent-color), var(--secondary-color)); color: white; }
+.sos-btn { background-color: var(--accent-color); color: white; border: none; padding: 15px; border-radius: 50%; cursor: pointer; }
+.container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+@media (max-width: 768px) { .container { padding: 10px; } .sos-btn { padding: 10px; } }

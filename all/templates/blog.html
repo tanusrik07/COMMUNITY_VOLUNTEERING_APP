@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}Blog - Helpize{% endblock %}
+{% block content %}
+<h1>Blog</h1>
+{% for p in posts %}
+<h2>{{ p.title }}</h2>
+<p>{{ p.content }}</p>
+<div id="comments-{{ p.id }}"></div>
+<input id="comment-{{ p.id }}" placeholder="Comment">
+<button onclick="addComment({{ p.id }})">Add</button>
+{% endfor %}
+{% endblock %}

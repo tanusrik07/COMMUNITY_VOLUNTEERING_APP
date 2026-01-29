@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}Home - Helpize{% endblock %}
+{% block content %}
+<centre>
+<h1>Welcome to Helpize</h1>
+<p>Connect for emergencies.</p>
+<button class="sos-btn" onclick="getLocation(); window.location.href='/sos'">SOS</button>
+<div id="notifications"></div>
+</centre>
+{% endblock %}

@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}SOS - Helpize{% endblock %}
+{% block content %}
+<h1>SOS Alert</h1>
+<form method="post">
+    <input type="text" id="location" name="location" placeholder="Location" required>
+    <textarea name="message" placeholder="Message" required></textarea>
+    <button type="submit">Send</button>
+</form>
+{% endblock %}
