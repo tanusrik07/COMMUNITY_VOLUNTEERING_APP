@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>VolunteerSOS - Sign Up</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="login-container">
+    <div class="login-logo">
+      <img src="https://img.freepik.com/free-vector/flat-design-teamwork-logo-template_23-2149492025.jpg?semt=ais_hybrid&w=740&q=80" alt="VolunteerSOS Logo" />
+    </div>
+    <h2>Create your VolunteerSOS Account</h2>
+    <form id="signupForm" onsubmit="return validateSignup()">
+      <div class="form-group">
+        <label for="fullname">Full Name</label>
+        <input
+          type="text"
+          id="fullname"
+          name="fullname"
+          placeholder="Enter your full name"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="Enter your email"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          placeholder="Create a password"
+          minlength="6"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="confirmPassword">Confirm Password</label>
+        <input
+          type="password"
+          id="confirmPassword"
+          name="confirmPassword"
+          placeholder="Confirm your password"
+          minlength="6"
+          required
+        />
+      </div>
+
+      <button type="submit" class="btn-primary">Sign Up</button>
+
+      <p class="signup-link">
+        Already have an account? <a href="login.html">Login here</a>
+      </p>
+
+      <p id="error-msg" class="error-message"></p>
+    </form>
+  </div>
+
+  <script>
+    function validateSignup() {
+      const fullname = document.getElementById('fullname').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value.trim();
+      const confirmPassword = document.getElementById('confirmPassword').value.trim();
+      const errorMsg = document.getElementById('error-msg');
+
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+      if (fullname.length < 3) {
+        errorMsg.textContent = 'Full name must be at least 3 characters.';
+        return false;
+      }
+      if (!emailPattern.test(email)) {
+        errorMsg.textContent = 'Please enter a valid email address.';
+        return false;
+      }
+      if (password.length < 6) {
+        errorMsg.textContent = 'Password must be at least 6 characters.';
+        return false;
+      }
+      if (password !== confirmPassword) {
+        errorMsg.textContent = 'Passwords do not match.';
+        return false;
+      }
+
+      errorMsg.textContent = '';

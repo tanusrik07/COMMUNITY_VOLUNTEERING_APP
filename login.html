@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>VolunteerSOS - Login</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="login-container">
+    <div class="login-logo">
+      <img src="https://img.freepik.com/free-vector/flat-design-teamwork-logo-template_23-2149492025.jpg?semt=ais_hybrid&w=740&q=80" alt="VolunteerSOS Logo" />
+    </div>
+    <h2>Login to VolunteerSOS</h2>
+    <form id="loginForm" onsubmit="return validateLogin()">
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="Enter your email"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          placeholder="Enter your password"
+          minlength="6"
+          required
+        />
+      </div>
+
+      <div class="form-group checkbox-group">
+        <input type="checkbox" id="rememberMe" name="rememberMe" />
+        <label for="rememberMe">Remember me</label>
+      </div>
+
+      <button type="submit" class="btn-primary">Login</button>
+      <p class="signup-link">
+        Don't have an account? <a href="signup.html">Sign up here</a>
+      </p>
+      <p id="error-msg" class="error-message"></p>
+    </form>
+  </div>
+
+  <script src="auth.js"></script>
+</body>
+</html>
