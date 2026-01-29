@@ -1,0 +1,133 @@
+from flask import Flask, render_template, request, redirect, url_for, flash
+import sqlite3
+
+app = Flask(__name__)
+app.secret_key = "secret123"   # needed for flash messages
+
+DB_NAME = "volunteers.db"
+
+
+# ---------- DATABASE ----------
+def get_db():
+    conn = sqlite3.connect(DB_NAME)
+    conn.row_factory = sqlite3.Row
+    return conn
+
+
+def init_db():
+    conn = get_db()
+    conn.execute("""
+        CREATE TABLE IF NOT EXISTS volunteers (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            name TEXT,
+            email TEXT,
+            phone TEXT,
+            age INTEGER,
+            interest TEXT,
+            availability TEXT,
+            address TEXT,
+            status TEXT DEFAULT 'Pending'
+        )
+    """)
+    conn.commit()
+    conn.close()
+
+
+# ---------- ROUTES ----------
+
+@app.route("/")
+@app.route("/home")
+def home():
+    return redirect("/join")
+
+
+@app.route("/join")
+def join():
+    return render_template("join.html")
+
+
+@app.route("/register_volunteer", methods=["POST"])
+def register_volunteer():
+    data = request.form
+
+    conn = get_db()
+    conn.execute("""
+        INSERT INTO volunteers 
+        (name, email, phone, age, interest, availability, address)
+        VALUES (?, ?, ?, ?, ?, ?, ?)
+    """, (
+        data["name"],
+        data["email"],
+        data["phone"],
+        data["age"],
+        data["interest"],
+        data["availability"],
+        data["address"]
+    ))
+    conn.commit()
+    conn.close()
+
+    flash("Registration successful! Waiting for admin approval.")
+    return redirect(url_for("success"))
+
+
+@app.route("/success")
+def success():
+    return render_template("success.html")
+
+
+@app.route("/profile/<email>")
+def profile(email):
+    conn = get_db()
+    volunteer = conn.execute(
+        "SELECT * FROM volunteers WHERE email = ?",
+        (email,)
+    ).fetchone()
+    conn.close()
+
+    return render_template("profile.html", v=volunteer)
+
+
+# ---------- ADMIN PANEL ----------
+
+@app.route("/admin")
+def admin():
+    conn = get_db()
+    volunteers = conn.execute(
+        "SELECT * FROM volunteers ORDER BY id DESC"
+    ).fetchall()
+    conn.close()
+
+    return render_template("admin.html", volunteers=volunteers)
+
+
+@app.route("/approve/<int:vid>")
+def approve(vid):
+    conn = get_db()
+    conn.execute(
+        "UPDATE volunteers SET status='Approved' WHERE id=?",
+        (vid,)
+    )
+    conn.commit()
+    conn.close()
+
+    return redirect("/admin")
+
+
+@app.route("/reject/<int:vid>")
+def reject(vid):
+    conn = get_db()
+    conn.execute(
+        "UPDATE volunteers SET status='Rejected' WHERE id=?",
+        (vid,)
+    )
+    conn.commit()
+    conn.close()
+
+    return redirect("/admin")
+
+
+# ---------- MAIN ----------
+if __name__ == "__main__":
+    init_db()
+    app.run(debug=True)
